@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
-const port = 8000;
+const PORT = 8000;
 
-app.get('/', (req, res) => {res.send('Hello World!')});
+app.use(express.urlencoded({ extended: true }));
+// Json Body Middleware
+app.use(express.json());
+app.get('/', (req, res) => { res.send('Hello World!') });
 
-app.listen(port, () => console.log(`I'm listening on port ${port}!`));
+app.listen(process.env.PORT || PORT, () => {
+    console.log(`Server started on port ${PORT}`)
+})
